@@ -48,7 +48,34 @@ class _SongPageScreenState extends State<SongPageScreen> {
                   height: 25.0,
                 ),
                 //cover art, artist name, song name
-                NeuBox(child: Image.asset('assets/images/cover-art.jpeg'))
+                NeuBox(
+                    child: Column(
+                  children: [
+                    ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.asset('assets/images/jheli.jpg')),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              songName,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 18),
+                            ),
+                            Text(
+                              artistName,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 18),
+                            ),
+                          ],
+                        ),
+                      ],
+                    )
+                  ],
+                )),
+
                 //start time, suffle button, repeat button, end time
 
                 //linear bar
