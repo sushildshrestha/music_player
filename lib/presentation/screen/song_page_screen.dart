@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:music_player/constants/text_constants.dart';
+import 'package:music_player/presentation/screen/drawer_screen.dart';
 import 'package:music_player/presentation/widgets/neu_Box.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
@@ -20,35 +21,50 @@ class _SongPageScreenState extends State<SongPageScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[300],
+        backgroundColor: Theme.of(context).colorScheme.background,
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.secondary,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Icon(Icons.notifications),
+            )
+          ],
+        ),
+        drawer: NeuBox(child: MyDrawer()),
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 10),
             child: Column(
               children: [
                 // Back button and Menu button
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      height: 60,
-                      width: 60,
-                      child: NeuBox(
-                          child: Icon(
-                        Icons.arrow_back,
-                      )),
-                    ),
-                    Text(centerTitleText),
-                    SizedBox(
-                      height: 60,
-                      width: 60,
-                      child: NeuBox(
-                          child: Icon(
-                        Icons.menu,
-                      )),
-                    ),
-                  ],
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     SizedBox(
+                //       height: 60,
+                //       width: 60,
+                //       child: GestureDetector(
+                //         onTap: () {
+                //           MyDrawer();
+                //         },
+                //         child: NeuBox(
+                //             child: Icon(
+                //           Icons.menu,
+                //         )),
+                //       ),
+                //     ),
+                //     Text(centerTitleText),
+                //     SizedBox(
+                //       height: 60,
+                //       width: 60,
+                //       child: NeuBox(
+                //           child: Icon(
+                //         Icons.notifications,
+                //       )),
+                //     ),
+                //   ],
+                // ),
                 const SizedBox(
                   height: 25.0,
                 ),
