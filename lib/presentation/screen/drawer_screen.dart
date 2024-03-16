@@ -31,7 +31,6 @@ class MyDrawer extends StatelessWidget {
                 child: Icon(
                   Icons.music_note,
                   size: 30,
-                  color: Theme.of(context).colorScheme.inversePrimary,
                 ),
               ),
             ),
@@ -42,12 +41,10 @@ class MyDrawer extends StatelessWidget {
               child: ListTile(
                 title: Text(
                   drawerListTileHome,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
                 ),
-                leading: Icon(Icons.home,
-                    color: Theme.of(context).colorScheme.primary),
+                leading: Icon(
+                  Icons.home,
+                ),
                 onTap: () {
                   Navigator.pop(context);
                 },
@@ -60,11 +57,8 @@ class MyDrawer extends StatelessWidget {
               child: ListTile(
                 title: Text(
                   drawerListTileSettings,
-                  style:
-                      TextStyle(color: Theme.of(context).colorScheme.primary),
                 ),
-                leading: Icon(Icons.settings,
-                    color: Theme.of(context).colorScheme.primary),
+                leading: Icon(Icons.settings),
                 onTap: () {
                   Navigator.push(
                       context,
