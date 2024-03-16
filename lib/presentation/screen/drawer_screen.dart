@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:music_player/constants/text_constants.dart';
