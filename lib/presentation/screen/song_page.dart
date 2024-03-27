@@ -115,12 +115,24 @@ class _SongPageState extends State<SongPage> {
             SizedBox(
               height: 25,
             ),
-            Slider(
+            SliderTheme(
+              data: SliderTheme.of(context).copyWith(
+                  thumbShape:
+                      const RoundSliderThumbShape(enabledThumbRadius: 0)),
+              child: Slider(
                 min: 0,
-                max: 100,
-                value: 0,
+                max: value.totalDuration.inSeconds.toDouble(),
+                value: value.currentDuration.inSeconds.toDouble(),
                 activeColor: Colors.green,
-                onChanged: (value) {}),
+                onChanged: (double double) {
+                  //during when the user sliding around
+                },
+                onChangeEnd: (double double) {
+                  //sliding has finished, go to that position in song duration
+                  value.seek(Duration(seconds: double.toInt()));
+                },
+              ),
+            ),
             SizedBox(
               height: 25,
             ),

@@ -3,7 +3,6 @@ import 'package:music_player/constants/text_constants.dart';
 import 'package:music_player/model/playlist_provider.dart';
 import 'package:music_player/model/song_model.dart';
 import 'package:music_player/presentation/screen/drawer_screen.dart';
-import 'package:music_player/presentation/screen/song_page_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'song_page.dart';
