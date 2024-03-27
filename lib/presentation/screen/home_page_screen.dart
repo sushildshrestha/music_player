@@ -3,7 +3,10 @@ import 'package:music_player/constants/text_constants.dart';
 import 'package:music_player/model/playlist_provider.dart';
 import 'package:music_player/model/song_model.dart';
 import 'package:music_player/presentation/screen/drawer_screen.dart';
+import 'package:music_player/presentation/screen/song_page_screen.dart';
 import 'package:provider/provider.dart';
+
+import 'song_page.dart';
 
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({super.key});
@@ -13,6 +16,26 @@ class HomePageScreen extends StatefulWidget {
 }
 
 class _HomePageScreenState extends State<HomePageScreen> {
+//get the playlist provider
+  late final dynamic playListProvider;
+
+  @override
+  void initState() {
+    super.initState();
+    //get playlist provider
+    playListProvider = Provider.of<PlaylistProvider>(context, listen: false);
+  }
+
+  //go to a song
+  void gotoSong(int songIndex) {
+    //update current song Index
+    playListProvider.currentSongIndex = songIndex;
+
+    //navigate to song page
+    Navigator.push(
+        context, MaterialPageRoute(builder: ((context) => const SongPage())));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +64,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 ),
                 subtitle: Text(song.artistName),
                 leading: Image.asset(song.albumImagePath),
+                onTap: () => gotoSong(index),
               );
             }));
       }),
