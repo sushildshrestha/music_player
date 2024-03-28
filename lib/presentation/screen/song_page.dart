@@ -16,6 +16,19 @@ class SongPage extends StatefulWidget {
 }
 
 class _SongPageState extends State<SongPage> {
+  bool isLiked = false;
+  bool isSuffle = true;
+  bool isRepeat = true;
+  bool isPaused = false;
+
+  //convert duration into minutes and seconds
+  String formatTime(Duration duration) {
+    String twoDigitSeconds =
+        duration.inSeconds.remainder(60).toString().padLeft(2, '0');
+    String formattedTime = '${duration.inMinutes}: ${twoDigitSeconds}';
+    return formattedTime;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<PlaylistProvider>(builder: (context, value, child) {
@@ -87,7 +100,18 @@ class _SongPageState extends State<SongPage> {
                         ],
                       ),
 
-                      Icon(Icons.favorite_border_outlined)
+                      IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isLiked = !isLiked;
+                            });
+                          },
+                          icon: isLiked
+                              ? Icon(
+                                  Icons.favorite,
+                                  color: Colors.red,
+                                )
+                              : Icon(Icons.favorite_border_outlined))
                     ],
                   ),
                 )
@@ -100,16 +124,32 @@ class _SongPageState extends State<SongPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 //start time
-                Text(initialTime),
+                Text(formatTime(value.currentDuration)),
 
                 //suffle icon
-                IconButton(onPressed: () {}, icon: Icon(Icons.shuffle)),
+                IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isSuffle = !isSuffle;
+                      });
+                    },
+                    icon: isSuffle
+                        ? Icon(Icons.shuffle)
+                        : Icon(Icons.shuffle_on_outlined)),
 
                 //repeat icon
-                IconButton(onPressed: () {}, icon: Icon(Icons.repeat)),
+                IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isRepeat = !isRepeat;
+                      });
+                    },
+                    icon: isRepeat
+                        ? Icon(Icons.repeat)
+                        : Icon(Icons.repeat_on_outlined)),
 
                 //end time
-                Text(endTime)
+                Text(formatTime(value.currentDuration))
               ],
             ),
             SizedBox(
@@ -143,7 +183,7 @@ class _SongPageState extends State<SongPage> {
                 children: [
                   Expanded(
                       child: GestureDetector(
-                          onTap: () {},
+                          onTap: value.playPreviousSong,
                           child: NeuBox(child: Icon(Icons.skip_previous)))),
                   const SizedBox(
                     width: 15,
@@ -151,14 +191,17 @@ class _SongPageState extends State<SongPage> {
                   Expanded(
                       flex: 2,
                       child: GestureDetector(
-                          onTap: () {},
-                          child: NeuBox(child: Icon(Icons.pause)))),
+                          onTap: value.pauseOrResume,
+                          child: NeuBox(
+                              child: value.isPlaying
+                                  ? Icon(Icons.play_arrow)
+                                  : Icon(Icons.pause)))),
                   const SizedBox(
                     width: 15,
                   ),
                   Expanded(
                       child: GestureDetector(
-                          onTap: () {},
+                          onTap: value.playNextSong,
                           child: NeuBox(child: Icon(Icons.skip_next)))),
                 ],
               ),
